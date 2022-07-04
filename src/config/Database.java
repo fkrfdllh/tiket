@@ -19,7 +19,7 @@ public class Database {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
 
-                connection = DriverManager.getConnection("jdbc:mysql://" + Environment.HOST + "/" + Environment.DB_NAME, Environment.DB_USER, Environment.DB_PASSWORD);
+                connection = DriverManager.getConnection("jdbc:mysql://" + Environment.HOST + ":" + String.valueOf(Environment.PORT) +  "/" + Environment.DB_NAME, Environment.DB_USER, Environment.DB_PASSWORD);
             } catch (Exception e) {
                 e.printStackTrace();
 
