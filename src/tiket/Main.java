@@ -5,10 +5,6 @@
  */
 package tiket;
 
-import dao.UserDAO;
-import dao.query.UserQuery;
-import model.User;
-
 /**
  *
  * @author fkrfd
