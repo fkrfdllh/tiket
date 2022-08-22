@@ -1,53 +1,87 @@
--- MariaDB dump 10.17  Distrib 10.4.14-MariaDB, for Win64 (AMD64)
---
--- Host: localhost    Database: ticket
--- ------------------------------------------------------
--- Server version	10.4.14-MariaDB
+DROP DATABASE IF EXISTS ticket;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE ticket;
 
---
--- Table structure for table `users`
---
+USE ticket;
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE admins(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	`password` VARCHAR(255) NOT NULL
+);
 
---
--- Dumping data for table `users`
---
+CREATE TABLE `events` (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	location VARCHAR(50) NOT NULL,
+	started_at DATETIME NOT NULL,
+	finished_at DATETIME NOT NULL
+);
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+CREATE TABLE stages (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	event_id INT UNSIGNED NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`number` TINYINT NOT NULL,
+	location VARCHAR(50) NOT NULL,
+	started_at DATETIME NOT NULL,
+	finished_at DATETIME NOT NULL
+);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+ALTER TABLE stages ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
 
--- Dump completed on 2022-07-04 10:52:53
+CREATE TABLE performances (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE event_stage_performances (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	event_id INT UNSIGNED NOT NULL,
+	stage_id INT UNSIGNED NOT NULL,
+	performance_id INT UNSIGNED NOT NULL
+);
+
+ALTER TABLE event_stage_performances ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+ALTER TABLE event_stage_performances ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);
+ALTER TABLE event_stage_performances ADD FOREIGN KEY (performance_id) REFERENCES `performances` (id);
+
+CREATE TABLE ticket_categories (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	event_id INT UNSIGNED NOT NULL,
+	stage_id INT UNSIGNED NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	category ENUM('full-day', 'daily') NOT NULL,
+	`type` ENUM('regular', 'vip') NOT NULL,
+	price INT NOT NULL,
+	quota SMALLINT NOT NULL
+);
+
+ALTER TABLE ticket_categories ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+ALTER TABLE ticket_categories ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);
+
+CREATE TABLE event_sponsor (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	event_id INT UNSIGNED,
+	`name` VARCHAR(50) NOT NULL,
+	tier TINYINT(1) NOT NULL
+);
+
+ALTER TABLE event_sponsor ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+
+CREATE TABLE ticket_registrations (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	event_id INT UNSIGNED NOT NULL,
+	stage_id INT UNSIGNED NOT NULL,
+	ticket_category_id INT UNSIGNED NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	address VARCHAR(100) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	ticket_total TINYINT NOT NULL,
+	price_total INT NOT NULL,
+	ordered_at DATETIME NOT NULL
+);
+
+ALTER TABLE ticket_registrations ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+ALTER TABLE ticket_registrations ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);

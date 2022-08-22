@@ -13,6 +13,12 @@ public class Database {
 
     private static Connection connection = null;
 
+    public Database() {
+        if (!isConnect()) {
+            System.err.println("Database isn't connected");
+        }
+    }
+
     public static Connection getConnection() {
         if (connection == null) {
 

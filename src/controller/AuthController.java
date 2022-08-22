@@ -5,17 +5,18 @@
  */
 package controller;
 
-import dao.UserDAO;
-import dao.query.UserQuery;
+import dao.query.AdminQuery;
+import dao.AdminDAO;
 
 /**
  *
  * @author fkrfd
  */
 public class AuthController {
-    private UserDAO userDao = new UserQuery();
-    
-    public int login(String username, String password) {
-        return userDao.login(username, password);
+
+    private final AdminDAO userDao = new AdminQuery();
+
+    public int login(String email, String password) {
+        return userDao.login(email, password);
     }
 }

@@ -5,6 +5,8 @@
  */
 package tiket;
 
+import java.util.Date;
+
 /**
  *
  * @author fkrfd
@@ -13,5 +15,9 @@ public class Main {
 
     public static void main(String[] args) {        
 //        TODO: Main Activity
+
+        Date curDate = new Date();
+        
+        System.out.println(curDate);
     }
 }
