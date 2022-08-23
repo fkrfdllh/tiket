@@ -61,14 +61,14 @@ CREATE TABLE ticket_categories (
 ALTER TABLE ticket_categories ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
 ALTER TABLE ticket_categories ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);
 
-CREATE TABLE event_sponsor (
+CREATE TABLE event_sponsors (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	event_id INT UNSIGNED,
 	`name` VARCHAR(50) NOT NULL,
 	tier TINYINT(1) NOT NULL
 );
 
-ALTER TABLE event_sponsor ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+ALTER TABLE event_sponsors ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
 
 CREATE TABLE ticket_registrations (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
