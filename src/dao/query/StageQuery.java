@@ -6,6 +6,7 @@
 package dao.query;
 
 import config.Database;
+import dao.EventDAO;
 import dao.StageDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,11 +27,13 @@ public class StageQuery implements StageDAO {
 
     private final Connection conn = Database.getConnection();
 
+    private final EventDAO eventDAO = new EventQuery();
+
     @Override
     public List<Stage> getStages() {
         List<Stage> stages = new ArrayList<>();
 
-        query = "SELECT stages.*, events.* FROM stages LEFT JOIN events ON stages.event_id = events.id";
+        query = "SELECT * FROM stages";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -40,20 +43,12 @@ public class StageQuery implements StageDAO {
             while (rs.next()) {
                 Stage stage = new Stage();
                 stage.setId(rs.getInt(1));
+                stage.setEvent(eventDAO.getEvent(rs.getInt(2)));
                 stage.setName(rs.getString(3));
                 stage.setNumber(rs.getInt(4));
                 stage.setLocation(rs.getString(5));
                 stage.setStartedAt(rs.getString(6));
                 stage.setFinishedAt(rs.getString(7));
-
-                Event event = new Event();
-                event.setId(rs.getInt(8));
-                event.setName(rs.getString(9));
-                event.setLocation(rs.getString(10));
-                event.setStartedAt(rs.getString(11));
-                event.setFinishedAt(rs.getString(12));
-
-                stage.setEvent(event);
 
                 stages.add(stage);
             }
@@ -68,7 +63,7 @@ public class StageQuery implements StageDAO {
     public Stage getStage(int id) {
         Stage stage = new Stage();
 
-        query = "SELECT stages.*, events.* FROM stages LEFT JOIN events ON stages.event_id = events.id WHERE stages.id = ?";
+        query = "SELECT * FROM stages WHERE id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -78,20 +73,12 @@ public class StageQuery implements StageDAO {
 
             if (rs.next()) {
                 stage.setId(rs.getInt(1));
+                stage.setEvent(eventDAO.getEvent(rs.getInt(2)));
                 stage.setName(rs.getString(3));
                 stage.setNumber(rs.getInt(4));
                 stage.setLocation(rs.getString(5));
                 stage.setStartedAt(rs.getString(6));
                 stage.setFinishedAt(rs.getString(7));
-
-                Event event = new Event();
-                event.setId(rs.getInt(8));
-                event.setName(rs.getString(9));
-                event.setLocation(rs.getString(10));
-                event.setStartedAt(rs.getString(11));
-                event.setFinishedAt(rs.getString(12));
-
-                stage.setEvent(event);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
