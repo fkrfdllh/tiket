@@ -118,7 +118,7 @@ public class TicketRegistrationQuery implements TicketRegistrationDAO {
             stmt.setString(6, email);
             stmt.setInt(7, ticketTotal);
             stmt.setInt(8, priceTotal);
-            stmt.setString(9, orderedAt);
+            stmt.setString(9, "NOW()");
             
             int row = stmt.executeUpdate();
             
