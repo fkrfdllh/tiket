@@ -7,32 +7,32 @@ package dao.query;
 
 import config.Database;
 import dao.EventDAO;
-import dao.StageDAO;
+import dao.EventSponsorDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Stage;
+import model.EventSponsor;
 
 /**
  *
  * @author fkrfd
  */
-public class StageQuery implements StageDAO {
-
-    private String query;
+public class EventSponsorQuery implements EventSponsorDAO {
 
     private final Connection conn = Database.getConnection();
 
-    private final EventDAO eventDAO = new EventQuery();
+    private final EventDAO eventDao = new EventQuery();
+
+    private String query;
 
     @Override
-    public List<Stage> getStages() {
-        List<Stage> stages = new ArrayList<>();
+    public List<EventSponsor> getEventSponsors() {
+        List<EventSponsor> sponsors = new ArrayList<>();
 
-        query = "SELECT * FROM stages";
+        query = "SELECT * FROM event_sponsors";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -40,29 +40,27 @@ public class StageQuery implements StageDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Stage stage = new Stage();
-                stage.setId(rs.getInt(1));
-                stage.setEvent(eventDAO.getEvent(rs.getInt(2)));
-                stage.setName(rs.getString(3));
-                stage.setNumber(rs.getInt(4));
-                stage.setLocation(rs.getString(5));
-                stage.setStartedAt(rs.getString(6));
-                stage.setFinishedAt(rs.getString(7));
+                EventSponsor sponsor = new EventSponsor();
+                sponsor.setId(rs.getInt(1));
+                sponsor.setEvent(eventDao.getEvent(rs.getInt(2)));
+                sponsor.setName(rs.getString(3));
+                sponsor.setTier(rs.getInt(4));
 
-                stages.add(stage);
+                sponsors.add(sponsor);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+            System.err.println(ex.getCause());
         }
 
-        return stages;
+        return sponsors;
     }
 
     @Override
-    public Stage getStage(int id) {
-        Stage stage = new Stage();
+    public EventSponsor getEventSponsor(int id) {
+        EventSponsor sponsor = new EventSponsor();
 
-        query = "SELECT * FROM stages WHERE id = ?";
+        query = "SELECT * FROM event_sponsors WHERE id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -71,33 +69,28 @@ public class StageQuery implements StageDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                stage.setId(rs.getInt(1));
-                stage.setEvent(eventDAO.getEvent(rs.getInt(2)));
-                stage.setName(rs.getString(3));
-                stage.setNumber(rs.getInt(4));
-                stage.setLocation(rs.getString(5));
-                stage.setStartedAt(rs.getString(6));
-                stage.setFinishedAt(rs.getString(7));
+                sponsor.setId(rs.getInt(1));
+                sponsor.setEvent(eventDao.getEvent(rs.getInt(2)));
+                sponsor.setName(rs.getString(3));
+                sponsor.setTier(rs.getInt(4));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+            System.err.println(ex.getCause());
         }
 
-        return stage;
+        return sponsor;
     }
 
     @Override
-    public boolean insertStage(int eventId, String name, int number, String location, String startedAt, String finishedAt) {
-        query = "INSERT INTO stages (event_id, name, number, location, started_at, finished_at) VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean insertEventSponsor(int eventId, String name, int tier) {
+        query = "INSERT INTO event_sponsors (event_id, name, tier) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, eventId);
             stmt.setString(2, name);
-            stmt.setInt(3, number);
-            stmt.setString(4, location);
-            stmt.setString(5, startedAt);
-            stmt.setString(6, finishedAt);
+            stmt.setInt(3, tier);
 
             int row = stmt.executeUpdate();
 
@@ -113,18 +106,15 @@ public class StageQuery implements StageDAO {
     }
 
     @Override
-    public boolean updateStage(Stage stage) {
-        query = "UPDATE stages SET event_id = ?, name = ?, number = ?, location = ?, started_at = ?, finished_at = ? WHERE id = ?";
+    public boolean updateEventSponsor(EventSponsor sponsor) {
+        query = "UPDATE event_sponsors SET event_id = ?, name = ?, tier = ? WHERE id = ?)";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, stage.getEvent().getId());
-            stmt.setString(2, stage.getName());
-            stmt.setInt(3, stage.getNumber());
-            stmt.setString(4, stage.getLocation());
-            stmt.setString(5, stage.getStartedAt());
-            stmt.setString(6, stage.getFinishedAt());
-            stmt.setInt(7, stage.getId());
+            stmt.setInt(1, sponsor.getEvent().getId());
+            stmt.setString(2, sponsor.getName());
+            stmt.setInt(3, sponsor.getTier());
+            stmt.setInt(4, sponsor.getId());
 
             int row = stmt.executeUpdate();
 
@@ -140,8 +130,8 @@ public class StageQuery implements StageDAO {
     }
 
     @Override
-    public boolean deleteStage(int id) {
-        query = "DELETE FROM stages WHERE id = ?";
+    public boolean deleteEventSponsor(int id) {
+        query = "DELETE FROM event_sponsors WHERE id = ?)";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
