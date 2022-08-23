@@ -45,17 +45,12 @@ public class AdminQuery implements AdminDAO {
                             return 1;
                         }
 
-                        statement1.close();
-
                         return 2;
                     }
-                    
-                    statement1.close();
                 } catch (SQLException ex) {
                     System.err.println(ex.getMessage());
                 }
             }
-            statement.close();
 
             return 3;
         } catch (SQLException e) {
@@ -80,8 +75,6 @@ public class AdminQuery implements AdminDAO {
             if (row > 0) {
                 return true;
             }
-
-            statement.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -108,8 +101,6 @@ public class AdminQuery implements AdminDAO {
 
                 admins.add(admin);
             }
-
-            statement.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

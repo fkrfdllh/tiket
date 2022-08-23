@@ -18,13 +18,13 @@ public class EventController {
 
     private final EventDAO eventDao = new EventQuery();
 
-    public List<Event> getEvents() {
+    public List<Event> getAll() {
         List<Event> events = eventDao.getEvents();
 
         return events;
     }
 
-    public Event getEvent(int id) {
+    public Event get(int id) {
         Event event = eventDao.getEvent(id);
 
         return event;

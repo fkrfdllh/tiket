@@ -98,8 +98,6 @@ public class EventQuery implements EventDAO {
             if (row > 0) {
                 return true;
             }
-
-            statement.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -124,8 +122,6 @@ public class EventQuery implements EventDAO {
             if (row > 0) {
                 return true;
             }
-
-            statement.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -146,8 +142,6 @@ public class EventQuery implements EventDAO {
             if (row > 0) {
                 return true;
             }
-
-            statement.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
