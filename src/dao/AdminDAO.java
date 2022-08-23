@@ -6,19 +6,19 @@
 package dao;
 
 import java.util.List;
-import model.User;
+import model.Admin;
 
 /**
  *
  * @author fkrfd
  */
-public interface UserDAO {
+public interface AdminDAO {
 
-    public int login(String username, String password);
+    public int login(String email, String password);
 
-    public boolean register(User user);
+    public boolean register(String name, String email, String password);
 
-    public List<User> getUsers();
+    public List<Admin> getAdmins();
     
-    public User getUser(String id);
+    public Admin getAdmin(int id);
 }
