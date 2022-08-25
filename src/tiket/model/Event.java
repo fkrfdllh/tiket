@@ -17,6 +17,14 @@ public class Event {
     public Event() {
     }
 
+    public Event(int id, String name, String location, String startedAt, String finishedAt) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.startedAt = startedAt;
+        this.finishedAt = finishedAt;
+    }
+
     public int getId() {
         return id;
     }

@@ -21,17 +21,18 @@ import javax.swing.table.DefaultTableModel;
 import tiket.controller.EventController;
 import tiket.helper.DateTimeFormatter;
 import tiket.model.Event;
+import tiket.view.authenticated.event.StageForm;
 
 /**
  *
  * @author fkrfd
  */
 public class EventForm extends javax.swing.JFrame {
-    
+
     private final EventController controller = new EventController();
-    
+
     private final DateTimeFormatter dateTimeFormatter = new DateTimeFormatter();
-    
+
     private DefaultTableModel tableModel;
 
     /**
@@ -39,34 +40,34 @@ public class EventForm extends javax.swing.JFrame {
      */
     public EventForm() {
         initComponents();
-        
+
         setEventTable();
         resetInput();
     }
-    
+
     private void timeOnly(KeyEvent event) {
         char c = event.getKeyChar();
-        
+
         if (!(Character.isDigit(c)) && c != ':') {
             event.consume();
         }
     }
-    
+
     private void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
-    
+
     private void setEventTable() {
         Object[] tableHeader = {"ID", "Nama Event", "Lokasi", "Waktu Mulai", "Waktu Selesai"};
         tableModel = new DefaultTableModel(null, tableHeader);
         tblEvent.setModel(tableModel);
-        
+
         populateTable();
     }
-    
+
     private void populateTable() {
         List<Event> events = controller.getAll();
-        
+
         events.forEach((event) -> {
             Object[] data = {
                 event.getId(),
@@ -75,22 +76,22 @@ public class EventForm extends javax.swing.JFrame {
                 event.getStartedAt(),
                 event.getFinishedAt()
             };
-            
+
             tableModel.addRow(data);
         });
     }
-    
+
     private String formatMysqlDate(Date date) {
         return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
-    
+
     private String setTimeFromDB(String time) {
         String[] tempTime = time.split(":");
         String[] copyTempTime = Arrays.copyOf(tempTime, tempTime.length - 1);
-        
+
         return String.join(":", copyTempTime);
     }
-    
+
     private void resetInput() {
         txtName.setText("");
         txtLocation.setText("");
@@ -98,6 +99,8 @@ public class EventForm extends javax.swing.JFrame {
         txtStartedTime.setText("");
         txtFinishedDate.setDate(new Date());
         txtFinishedTime.setText("");
+
+        btnToStage.setEnabled(false);
     }
 
     /**
@@ -134,6 +137,8 @@ public class EventForm extends javax.swing.JFrame {
         eventBtnAdd = new javax.swing.JButton();
         eventBtnDelete = new javax.swing.JButton();
         eventBtnEdit = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        btnToStage = new javax.swing.JButton();
 
         txtId.setEditable(false);
         txtId.setColumns(20);
@@ -143,6 +148,7 @@ public class EventForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Manajemen Event");
 
         tblEvent.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,51 +242,66 @@ public class EventForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Dashboard >");
+
+        btnToStage.setText("Manajemen Stage >");
+        btnToStage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToStageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
+                .addComponent(btnToStage)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtStartedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4)
+                        .addComponent(txtFinishedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5)
+                        .addComponent(eventBtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(644, 644, 644))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eventBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtStartedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane4)
-                                .addComponent(txtFinishedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane5)
-                                .addComponent(eventBtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(eventBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(eventBtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(eventBtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel10)
+                    .addComponent(btnToStage))
+                .addContainerGap(503, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel1)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(36, 36, 36)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1)
                         .addGroup(layout.createSequentialGroup()
@@ -336,17 +357,17 @@ public class EventForm extends javax.swing.JFrame {
     private void eventBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventBtnAddActionPerformed
         String startedDate = formatMysqlDate(txtStartedDate.getDate());
         String finishedDate = formatMysqlDate(txtFinishedDate.getDate());
-        
+
         String startedAt = startedDate + " " + txtStartedTime.getText();
         String finishedAt = finishedDate + " " + txtFinishedTime.getText();
-        
+
         boolean response = controller.insert(txtName.getText(), txtLocation.getText(), startedAt, finishedAt);
-        
+
         if (!response) {
             showMessage("Terjadi kesalahan saat menyimpan data, silahkan coba lagi");
             return;
         }
-        
+
         showMessage("Berhasil menyimpan data");
         setEventTable();
         resetInput();
@@ -354,40 +375,40 @@ public class EventForm extends javax.swing.JFrame {
 
     private void tblEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventMouseClicked
         int clickCount = evt.getClickCount();
-        
+
         int row = tblEvent.getSelectedRow();
-        
-        if (clickCount == 1) {
-            String id = tableModel.getValueAt(row, 0).toString();
-            String name = tableModel.getValueAt(row, 1).toString();
-            String location = tableModel.getValueAt(row, 2).toString();
-            String startedAt = tableModel.getValueAt(row, 3).toString();
-            String finishedAt = tableModel.getValueAt(row, 4).toString();
-            
-            String[] tempStartedAt = startedAt.split(" ");
-            String[] tempFinishedAt = finishedAt.split(" ");
-            
-            Date startedDate = null;
-            Date finishedDate = null;
-            
-            try {
-                startedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempStartedAt[0]);
-                finishedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempFinishedAt[0]);
-            } catch (ParseException ex) {
-                System.err.println(ex.getMessage());
-            }
-                        
-            String startedTime = setTimeFromDB(tempStartedAt[1]);
-            String finishedTime = setTimeFromDB(tempFinishedAt[1]);
-            
-            txtId.setText(id);
-            txtName.setText(name);
-            txtLocation.setText(location);
-            txtStartedDate.setDate(startedDate);
-            txtStartedTime.setText(startedTime);
-            txtFinishedDate.setDate(finishedDate);
-            txtFinishedTime.setText(finishedTime);
+
+        String id = tableModel.getValueAt(row, 0).toString();
+        String name = tableModel.getValueAt(row, 1).toString();
+        String location = tableModel.getValueAt(row, 2).toString();
+        String startedAt = tableModel.getValueAt(row, 3).toString();
+        String finishedAt = tableModel.getValueAt(row, 4).toString();
+
+        String[] tempStartedAt = startedAt.split(" ");
+        String[] tempFinishedAt = finishedAt.split(" ");
+
+        Date startedDate = null;
+        Date finishedDate = null;
+
+        try {
+            startedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempStartedAt[0]);
+            finishedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempFinishedAt[0]);
+        } catch (ParseException ex) {
+            System.err.println(ex.getMessage());
         }
+
+        String startedTime = setTimeFromDB(tempStartedAt[1]);
+        String finishedTime = setTimeFromDB(tempFinishedAt[1]);
+
+        txtId.setText(id);
+        txtName.setText(name);
+        txtLocation.setText(location);
+        txtStartedDate.setDate(startedDate);
+        txtStartedTime.setText(startedTime);
+        txtFinishedDate.setDate(finishedDate);
+        txtFinishedTime.setText(finishedTime);
+
+        btnToStage.setEnabled(true);
     }//GEN-LAST:event_tblEventMouseClicked
 
     private void eventBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventBtnEditActionPerformed
@@ -395,27 +416,27 @@ public class EventForm extends javax.swing.JFrame {
             showMessage("Anda harus memilih data terlebih dahulu");
             return;
         }
-        
+
         String startedDate = formatMysqlDate(txtStartedDate.getDate());
         String finishedDate = formatMysqlDate(txtFinishedDate.getDate());
-        
+
         String startedAt = startedDate + " " + txtStartedTime.getText();
         String finishedAt = finishedDate + " " + txtFinishedTime.getText();
-        
+
         Event event = new Event();
         event.setId(new Integer(txtId.getText()));
         event.setName(txtName.getText());
         event.setLocation(txtLocation.getText());
         event.setStartedAt(startedAt);
         event.setFinishedAt(finishedAt);
-        
+
         boolean response = controller.update(event);
-        
+
         if (!response) {
             showMessage("Terjadi kesalahan saat mengubah data, silahkan coba lagi");
             return;
         }
-        
+
         showMessage("Berhasil mengubah data");
         setEventTable();
         resetInput();
@@ -426,18 +447,23 @@ public class EventForm extends javax.swing.JFrame {
             showMessage("Anda harus memilih data terlebih dahulu");
             return;
         }
-        
+
         boolean response = controller.delete(new Integer(txtId.getText()));
-        
+
         if (!response) {
             showMessage("Terjadi kesalahan saat menghapus data, silahkan coba lagi");
             return;
         }
-        
+
         showMessage("Berhasil menghapus data");
         setEventTable();
         resetInput();
     }//GEN-LAST:event_eventBtnDeleteActionPerformed
+
+    private void btnToStageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToStageActionPerformed
+        StageForm stageForm = new StageForm(new Integer(txtId.getText()));
+        stageForm.setVisible(true);
+    }//GEN-LAST:event_btnToStageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,10 +502,12 @@ public class EventForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnToStage;
     private javax.swing.JButton eventBtnAdd;
     private javax.swing.JButton eventBtnDelete;
     private javax.swing.JButton eventBtnEdit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
