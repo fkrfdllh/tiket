@@ -6,18 +6,18 @@
 package tiket;
 
 import java.util.Date;
+import tiket.view.Login;
 
 /**
  *
  * @author fkrfd
  */
 public class Main {
-
-    public static void main(String[] args) {        
-//        TODO: Main Activity
-
-        Date curDate = new Date();
+    
+    public static void main(String[] args) {
         
-        System.out.println(curDate);
+        Login login = new Login();
+        login.setVisible(true);
+        
     }
 }

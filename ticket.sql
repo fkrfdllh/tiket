@@ -11,6 +11,8 @@ CREATE TABLE admins(
 	`password` VARCHAR(255) NOT NULL
 );
 
+INSERT INTO admins SET `name` = "admin", email = "admin@admin.com", `password` = PASSWORD("admin");
+
 CREATE TABLE `events` (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`name` VARCHAR(50) NOT NULL,
