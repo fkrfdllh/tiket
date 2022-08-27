@@ -101,7 +101,7 @@ public class PerformanceForm extends javax.swing.JFrame {
         txtStartedDate.setDate(new Date());
         txtStartedTime.setText("");
         
-        btnDelete.setEnabled(true);
+        btnAdd.setEnabled(true);
     }
 
     private void setPerformanceList() {
@@ -334,7 +334,7 @@ public class PerformanceForm extends javax.swing.JFrame {
         
         txtId.setText(id);
         
-        btnDelete.setEnabled(false);
+        btnAdd.setEnabled(false);
     }//GEN-LAST:event_tblPerformanceMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

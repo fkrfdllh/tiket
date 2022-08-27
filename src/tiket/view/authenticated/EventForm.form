@@ -45,7 +45,9 @@
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="401" max="32767" attributes="0"/>
+                      <EmptySpace pref="231" max="32767" attributes="0"/>
+                      <Component id="btnToSponsor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnToStage" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -91,6 +93,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnToStage" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnToSponsor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="502" max="32767" attributes="0"/>
               <Component id="btnReset" min="-2" max="-2" attributes="0"/>
@@ -356,6 +359,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnToSponsor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manajemen Sponsor &gt;"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnToSponsorActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

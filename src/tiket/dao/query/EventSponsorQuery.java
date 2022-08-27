@@ -29,13 +29,14 @@ public class EventSponsorQuery implements EventSponsorDAO {
     private String query;
 
     @Override
-    public List<EventSponsor> getEventSponsors() {
+    public List<EventSponsor> getEventSponsors(int eventId) {
         List<EventSponsor> sponsors = new ArrayList<>();
 
-        query = "SELECT * FROM event_sponsors";
+        query = "SELECT * FROM event_sponsors WHERE event_id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, eventId);
 
             ResultSet rs = stmt.executeQuery();
 

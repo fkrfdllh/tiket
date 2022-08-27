@@ -14,7 +14,7 @@ import tiket.model.EventSponsor;
  */
 public interface EventSponsorDAO {
 
-    public List<EventSponsor> getEventSponsors();
+    public List<EventSponsor> getEventSponsors(int eventId);
 
     public EventSponsor getEventSponsor(int id);
 

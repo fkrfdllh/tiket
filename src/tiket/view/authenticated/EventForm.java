@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import tiket.controller.EventController;
 import tiket.helper.DTHelper;
 import tiket.model.Event;
+import tiket.view.authenticated.event.SponsorForm;
 import tiket.view.authenticated.event.StageForm;
 
 /**
@@ -126,6 +127,7 @@ public class EventForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnToStage = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        btnToSponsor = new javax.swing.JButton();
 
         txtId.setEditable(false);
         txtId.setColumns(20);
@@ -246,6 +248,14 @@ public class EventForm extends javax.swing.JFrame {
             }
         });
 
+        btnToSponsor.setText("Manajemen Sponsor >");
+        btnToSponsor.setEnabled(false);
+        btnToSponsor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToSponsorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,7 +270,9 @@ public class EventForm extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                        .addComponent(btnToSponsor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnToStage)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +309,8 @@ public class EventForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel10)
-                    .addComponent(btnToStage))
+                    .addComponent(btnToStage)
+                    .addComponent(btnToSponsor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
                 .addComponent(btnReset)
                 .addContainerGap())
@@ -463,6 +476,11 @@ public class EventForm extends javax.swing.JFrame {
         resetInput();
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void btnToSponsorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToSponsorActionPerformed
+        SponsorForm sponsorForm = new SponsorForm(new Integer(txtId.getText()));
+        sponsorForm.setVisible(true);
+    }//GEN-LAST:event_btnToSponsorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -501,6 +519,7 @@ public class EventForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnToSponsor;
     private javax.swing.JButton btnToStage;
     private javax.swing.JButton eventBtnAdd;
     private javax.swing.JButton eventBtnDelete;

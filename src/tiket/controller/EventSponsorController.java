@@ -18,8 +18,8 @@ public class EventSponsorController {
 
     private final EventSponsorDAO eventSponsorDAO = new EventSponsorQuery();
 
-    public List<EventSponsor> getAll() {
-        return eventSponsorDAO.getEventSponsors();
+    public List<EventSponsor> getAll(int eventId) {
+        return eventSponsorDAO.getEventSponsors(eventId);
     }
     
     public EventSponsor get(int id) {
