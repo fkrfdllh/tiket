@@ -43,4 +43,8 @@ public class DTHelper {
 
         return String.join(":", copyTempTime);
     }
+
+    public String formatMysqlDate(String startedDate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
