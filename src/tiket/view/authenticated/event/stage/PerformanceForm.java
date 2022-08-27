@@ -360,7 +360,7 @@ public class PerformanceForm extends javax.swing.JFrame {
             return;
         }
 
-        boolean response = stageController.delete(new Integer(txtId.getText()));
+        boolean response = performanceController.delete(new Integer(txtId.getText()));
 
         if (!response) {
             showMessage("Terjadi kesalahan saat menghapus data, silahkan coba lagi");

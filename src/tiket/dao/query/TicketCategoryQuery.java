@@ -32,13 +32,15 @@ public class TicketCategoryQuery implements TicketCategoryDAO {
     private final StageDAO stageDAO = new StageQuery();
 
     @Override
-    public List<TicketCategory> getTicketCategories() {
+    public List<TicketCategory> getTicketCategories(int eventId, int stageId) {
         List<TicketCategory> categories = new ArrayList<>();
 
-        query = "SELECT * FROM ticket_categories";
+        query = "SELECT * FROM ticket_categories WHERE event_id = ? AND stage_id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, eventId);
+            stmt.setInt(2, stageId);
 
             ResultSet rs = stmt.executeQuery();
 

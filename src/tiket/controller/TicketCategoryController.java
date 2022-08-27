@@ -18,8 +18,8 @@ import tiket.model.TicketCategory;
 public class TicketCategoryController {
     private final TicketCategoryDAO categoryDAO = new TicketCategoryQuery();
     
-    public List<TicketCategory> getAll() {
-        return categoryDAO.getTicketCategories();
+    public List<TicketCategory> getAll(int eventId, int stageId) {
+        return categoryDAO.getTicketCategories(eventId, stageId);
     }
     
     public TicketCategory get(int id) {

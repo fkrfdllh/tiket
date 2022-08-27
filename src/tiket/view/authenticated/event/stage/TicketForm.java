@@ -5,33 +5,96 @@
  */
 package tiket.view.authenticated.event.stage;
 
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import tiket.controller.EventController;
 import tiket.controller.StageController;
+import tiket.controller.TicketCategoryController;
+import tiket.helper.StrHelper;
 import tiket.model.Event;
 import tiket.model.Stage;
+import tiket.model.TicketCategory;
 
 /**
  *
  * @author fkrfd
  */
 public class TicketForm extends javax.swing.JFrame {
-    
+
     private Event event = null;
-    
-    private  Stage stage = null;
-    
+
+    private Stage stage = null;
+
     private final EventController eventController = new EventController();
-    
+
     private final StageController stageController = new StageController();
+
+    private final TicketCategoryController ticketController = new TicketCategoryController();
+
+    private DefaultTableModel tableModel;
+
+    private final StrHelper strHelper = new StrHelper();
 
     /**
      * Creates new form TicketForm
      */
     public TicketForm(int eventId, int stageId) {
         initComponents();
-        
+
         event = eventController.get(eventId);
         stage = stageController.get(stageId);
+
+        setTicketTable();
+        resetInput();
+    }
+
+    private void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    private void numberOnly(KeyEvent event) {
+        char c = event.getKeyChar();
+
+        if (!(Character.isDigit(c))) {
+            event.consume();
+        }
+    }
+
+    private void setTicketTable() {
+        Object[] tableHeader = {"ID Tiket", "Nama Tiket", "Kategori Tiket", "Tipe Tiket", "Harga", "Kuota"};
+        tableModel = new DefaultTableModel(null, tableHeader);
+        tblTicket.setModel(tableModel);
+
+        populateTable();
+    }
+
+    private void populateTable() {
+        List<TicketCategory> tickets = ticketController.getAll(event.getId(), stage.getId());
+
+        tickets.forEach((ticket) -> {
+            Object[] data = {
+                ticket.getId(),
+                ticket.getName(),
+                strHelper.unSlug(ticket.getCategory()),
+                strHelper.unSlug(ticket.getType()),
+                ticket.getPrice(),
+                ticket.getQuota()
+            };
+
+            tableModel.addRow(data);
+        });
+    }
+
+    private void resetInput() {
+        txtId.setText("");
+        txtName.setText("");
+        cbCategory.setSelectedIndex(0);
+        cbType.setSelectedIndex(0);
+        txtPrice.setText("");
+        txtQuota.setText("");
     }
 
     /**
@@ -43,21 +106,290 @@ public class TicketForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtId = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTicket = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cbCategory = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cbType = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtQuota = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+
+        txtId.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(1366, 768));
+
+        jLabel10.setText("Dashboard >");
+
+        jLabel1.setText("Manajemen Event >");
+
+        jLabel2.setText("Manajemen Stage >");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel3.setText("Manajemen Tiket");
+
+        tblTicket.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTicket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTicketMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTicket);
+
+        jLabel4.setText("Nama Tiket");
+
+        jLabel5.setText("Kategori Tiket");
+
+        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full Pass", "Daily Pass" }));
+
+        jLabel6.setText("Tipe Tiket");
+
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Regular", "VIP" }));
+
+        jLabel7.setText("Harga");
+
+        txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPriceKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setText("Kuota");
+
+        txtQuota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuotaKeyTyped(evt);
+            }
+        });
+
+        btnAdd.setText("Tambah");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setText("Ubah");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Hapus");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(txtName)
+                                .addComponent(jLabel5)
+                                .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addComponent(cbType, 0, 250, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addComponent(txtPrice))
+                            .addComponent(jLabel8)
+                            .addComponent(txtQuota, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnReset, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtQuota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd)
+                            .addComponent(btnEdit))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReset)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTicketMouseClicked
+        int row = tblTicket.getSelectedRow();
+
+        String id = tableModel.getValueAt(row, 0).toString();
+        String name = tableModel.getValueAt(row, 1).toString();
+        String category = tableModel.getValueAt(row, 3).toString();
+        String type = tableModel.getValueAt(row, 4).toString();
+        String price = tableModel.getValueAt(row, 5).toString();
+        String quota = tableModel.getValueAt(row, 6).toString();
+
+        txtId.setText(id);
+        txtName.setText(name);
+        cbCategory.setSelectedItem(category);
+        cbType.setSelectedItem(type);
+        txtPrice.setText(price);
+        txtQuota.setText(quota);
+    }//GEN-LAST:event_tblTicketMouseClicked
+
+    private void txtPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPriceKeyTyped
+        numberOnly(evt);
+    }//GEN-LAST:event_txtPriceKeyTyped
+
+    private void txtQuotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuotaKeyTyped
+        numberOnly(evt);
+    }//GEN-LAST:event_txtQuotaKeyTyped
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        boolean response = ticketController.insert(event.getId(), stage.getId(), txtName.getText(), cbCategory.getSelectedItem().toString(), cbType.getSelectedItem().toString(), new Integer(txtPrice.getText()), new Integer(txtQuota.getText()));
+
+        if (!response) {
+            showMessage("Terjadi kesalahan saat menyimpan data, silahkan coba lagi");
+            return;
+        }
+
+        showMessage("Berhasil menyimpan data");
+        setTicketTable();
+        resetInput();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        if (txtId.getText().equals("")) {
+            showMessage("Anda harus memilih data terlebih dahulu");
+            return;
+        }
+
+        String category = strHelper.slug(cbCategory.getSelectedItem().toString());
+        String type = strHelper.slug(cbType.getSelectedItem().toString());
+
+        TicketCategory ticket = new TicketCategory();
+        ticket.setId(new Integer(txtId.getText()));
+        ticket.setEvent(eventController.get(event.getId()));
+        ticket.setStage(stageController.get(stage.getId()));
+        ticket.setName(txtName.getText());
+        ticket.setCategory(category);
+        ticket.setType(type);
+        ticket.setPrice(new Integer(txtPrice.getText()));
+        ticket.setQuota(new Integer(txtQuota.getText()));
+
+        boolean response = ticketController.update(ticket);
+
+        if (!response) {
+            showMessage("Terjadi kesalahan saat mengubah data, silahkan coba lagi");
+            return;
+        }
+
+        showMessage("Berhasil mengubah data");
+        setTicketTable();
+        resetInput();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (txtId.getText().equals("")) {
+            showMessage("Anda harus memilih data terlebih dahulu");
+            return;
+        }
+
+        boolean response = ticketController.delete(new Integer(txtId.getText()));
+
+        if (!response) {
+            showMessage("Terjadi kesalahan saat menghapus data, silahkan coba lagi");
+            return;
+        }
+
+        showMessage("Berhasil menghapus data");
+        setTicketTable();
+        resetInput();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        resetInput();
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,5 +427,26 @@ public class TicketForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JComboBox<String> cbType;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblTicket;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQuota;
     // End of variables declaration//GEN-END:variables
 }

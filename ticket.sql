@@ -59,7 +59,7 @@ CREATE TABLE ticket_categories (
 	event_id INT UNSIGNED NOT NULL,
 	stage_id INT UNSIGNED NOT NULL,
 	`name` VARCHAR(50) NOT NULL,
-	category ENUM('full-day', 'daily') NOT NULL,
+	category ENUM('full-pass', 'daily-pass') NOT NULL,
 	`type` ENUM('regular', 'vip') NOT NULL,
 	price INT NOT NULL,
 	quota SMALLINT NOT NULL

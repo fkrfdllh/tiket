@@ -14,7 +14,7 @@ import tiket.model.TicketCategory;
  */
 public interface TicketCategoryDAO {
 
-    public List<TicketCategory> getTicketCategories();
+    public List<TicketCategory> getTicketCategories(int eventId, int stageId);
 
     public TicketCategory getTicketCategory(int id);
 
