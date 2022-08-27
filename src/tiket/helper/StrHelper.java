@@ -29,4 +29,14 @@ public class StrHelper {
         return temp[0] + " " + temp[1];
     }
     
+    public String toUpCase(String data) {
+        if (data.equals("regular")) {
+            data = data.substring(0, 1).toUpperCase() + data.substring(1);
+        } else {
+            data = data.toUpperCase();
+        }
+        
+        return data;
+    }
+    
 }

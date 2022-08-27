@@ -31,7 +31,7 @@ public class TicketCategoryController {
     
     public boolean insert(int eventId, int stageId, String name, String category, String type, int price, int quota) {
         category = strHelper.slug(category);
-        type = strHelper.slug(type);
+        type = type.toLowerCase();
         
         return categoryDAO.insertTicketCategory(eventId, stageId, name, category, type, price, quota);
     }

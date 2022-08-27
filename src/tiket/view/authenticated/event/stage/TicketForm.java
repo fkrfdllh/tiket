@@ -79,7 +79,7 @@ public class TicketForm extends javax.swing.JFrame {
                 ticket.getId(),
                 ticket.getName(),
                 strHelper.unSlug(ticket.getCategory()),
-                strHelper.unSlug(ticket.getType()),
+                strHelper.toUpCase(ticket.getType()),
                 ticket.getPrice(),
                 ticket.getQuota()
             };
@@ -345,7 +345,7 @@ public class TicketForm extends javax.swing.JFrame {
         }
 
         String category = strHelper.slug(cbCategory.getSelectedItem().toString());
-        String type = strHelper.slug(cbType.getSelectedItem().toString());
+        String type = cbType.getSelectedItem().toString().toLowerCase();
 
         TicketCategory ticket = new TicketCategory();
         ticket.setId(new Integer(txtId.getText()));

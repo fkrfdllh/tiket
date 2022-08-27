@@ -3,28 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/EventStagePerformanceDAO.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/controller/PerformanceController.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/view/authenticated/DashboardForm.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/query/EventQuery.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/controller/EventStagePerformanceController.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/model/Event.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/model/EventStagePerformance.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/controller/TicketRegistrationController.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/query/EventStagePerformanceQuery.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/controller/EventController.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/config/Database.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/query/TicketRegistrationQuery.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/PerformanceDAO.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/TicketCategoryDAO.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/view/authenticated/EventForm.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/view/LoginForm.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/view/authenticated/event/StageForm.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/model/TicketRegistration.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/query/AdminQuery.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/controller/AuthController.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/Main.java</file>
-            <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/config/Environment.java</file>
             <file>file:/C:/Users/fkrfd/Documents/jProj/pemrograman-visual/tiket/src/tiket/dao/TicketRegistrationDAO.java</file>
         </group>
     </open-files>
