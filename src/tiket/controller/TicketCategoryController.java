@@ -9,6 +9,7 @@ package tiket.controller;
 import tiket.dao.TicketCategoryDAO;
 import tiket.dao.query.TicketCategoryQuery;
 import java.util.List;
+import tiket.helper.StrHelper;
 import tiket.model.TicketCategory;
 
 /**
@@ -17,6 +18,8 @@ import tiket.model.TicketCategory;
  */
 public class TicketCategoryController {
     private final TicketCategoryDAO categoryDAO = new TicketCategoryQuery();
+    
+    private final StrHelper strHelper = new StrHelper();
     
     public List<TicketCategory> getAll(int eventId, int stageId) {
         return categoryDAO.getTicketCategories(eventId, stageId);
@@ -27,6 +30,9 @@ public class TicketCategoryController {
     }
     
     public boolean insert(int eventId, int stageId, String name, String category, String type, int price, int quota) {
+        category = strHelper.slug(category);
+        type = strHelper.slug(type);
+        
         return categoryDAO.insertTicketCategory(eventId, stageId, name, category, type, price, quota);
     }
     
