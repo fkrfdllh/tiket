@@ -6,6 +6,8 @@
 package tiket.view.authenticated.event;
 
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -37,17 +39,15 @@ public class StageForm extends javax.swing.JFrame {
     /**
      * Creates new form StageForm
      */
-    public StageForm() {
+    public StageForm(int eventId) {
         initComponents();
+                
+        event = eventController.get(eventId);
         
         lblEventName.setText(event.getName());
                 
         setStageTable();
         resetInput();
-    }
-    
-    public StageForm(int eventId) {
-        event = eventController.get(eventId);
     }
     
     private void timeOnly(KeyEvent event) {
@@ -501,7 +501,42 @@ public class StageForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnToPerformanceActionPerformed
 
     private void tblStageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStageMouseClicked
-        // TODO add your handling code here:
+        int row = tblStage.getSelectedRow();
+
+        String id = tableModel.getValueAt(row, 0).toString();
+        String name = tableModel.getValueAt(row, 2).toString();
+        String number = tableModel.getValueAt(row, 3).toString();
+        String location = tableModel.getValueAt(row, 4).toString();
+        String startedAt = tableModel.getValueAt(row, 5).toString();
+        String finishedAt = tableModel.getValueAt(row, 6).toString();
+
+        String[] tempStartedAt = startedAt.split(" ");
+        String[] tempFinishedAt = finishedAt.split(" ");
+
+        Date startedDate = null;
+        Date finishedDate = null;
+
+        try {
+            startedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempStartedAt[0]);
+            finishedDate = new SimpleDateFormat("yyyy-MM-dd").parse(tempFinishedAt[0]);
+        } catch (ParseException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        String startedTime = dtHelper.setTimeFromDB(tempStartedAt[1]);
+        String finishedTime = dtHelper.setTimeFromDB(tempFinishedAt[1]);
+
+        txtId.setText(id);
+        txtName.setText(name);
+        txtNumber.setText(number);
+        txtLocation.setText(location);
+        txtStartedDate.setDate(startedDate);
+        txtStartedTime.setText(startedTime);
+        txtFinishedDate.setDate(finishedDate);
+        txtFinishedTime.setText(finishedTime);
+
+        btnToPerformance.setEnabled(true);
+        btnToTicket.setEnabled(true);
     }//GEN-LAST:event_tblStageMouseClicked
 
     /**

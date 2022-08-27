@@ -35,13 +35,15 @@ public class EventStagePerformanceQuery implements EventStagePerformanceDAO {
     private String query;
 
     @Override
-    public List<EventStagePerformance> getEventStagePerformances() {
+    public List<EventStagePerformance> getEventStagePerformances(int eventId, int stageId) {
         List<EventStagePerformance> list = new ArrayList<>();
 
-        query = "SELECT * FROM event_stage_performace";
+        query = "SELECT * FROM event_stage_performance WHERE event_id = ? AND stage_id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, eventId);
+            stmt.setInt(2, stageId);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -66,7 +68,7 @@ public class EventStagePerformanceQuery implements EventStagePerformanceDAO {
     public EventStagePerformance getEventStagePerformance(int id) {
         EventStagePerformance item = new EventStagePerformance();
 
-        query = "SELECT * FROM event_stage_performace WHERE id = ?";
+        query = "SELECT * FROM event_stage_performance WHERE id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -89,14 +91,15 @@ public class EventStagePerformanceQuery implements EventStagePerformanceDAO {
     }
 
     @Override
-    public boolean insertEventStagePerformance(int eventId, int stageId, int performanceId) {
-        query = "INSERT INTO event_stage_performance (event_id, stage_id, performance_id) VALUES (?, ?, ?)";
+    public boolean insertEventStagePerformance(int eventId, int stageId, int performanceId, String startedAt) {
+        query = "INSERT INTO event_stage_performance (event_id, stage_id, performance_id, started_at) VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, eventId);
             stmt.setInt(2, stageId);
             stmt.setInt(3, performanceId);
+            stmt.setString(4, startedAt);
 
             int row = stmt.executeUpdate();
 
@@ -113,14 +116,15 @@ public class EventStagePerformanceQuery implements EventStagePerformanceDAO {
 
     @Override
     public boolean updateEventStagePerformance(EventStagePerformance eventStagePerformance) {
-        query = "UPDATE event_stage_performance SET event_id = ?, stage_id = ?, performance_id = ? WHERE id = ?";
+        query = "UPDATE event_stage_performance SET event_id = ?, stage_id = ?, performance_id = ?, started_at = ? WHERE id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, eventStagePerformance.getEvent().getId());
             stmt.setInt(2, eventStagePerformance.getStage().getId());
             stmt.setInt(3, eventStagePerformance.getPerformance().getId());
-            stmt.setInt(4, eventStagePerformance.getId());
+            stmt.setString(4, eventStagePerformance.getStartedAt());
+            stmt.setInt(5, eventStagePerformance.getId());
 
             int row = stmt.executeUpdate();
 

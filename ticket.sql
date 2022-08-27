@@ -21,6 +21,8 @@ CREATE TABLE `events` (
 	finished_at DATETIME NOT NULL
 );
 
+SELECT * FROM `events`;
+
 CREATE TABLE stages (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	event_id INT UNSIGNED NOT NULL,
@@ -31,6 +33,8 @@ CREATE TABLE stages (
 	finished_at DATETIME NOT NULL
 );
 
+SELECT * FROM stages;
+
 ALTER TABLE stages ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
 
 CREATE TABLE performances (
@@ -38,16 +42,17 @@ CREATE TABLE performances (
 	`name` VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE event_stage_performances (
+CREATE TABLE event_stage_performance (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	event_id INT UNSIGNED NOT NULL,
 	stage_id INT UNSIGNED NOT NULL,
-	performance_id INT UNSIGNED NOT NULL
+	performance_id INT UNSIGNED NOT NULL,
+	started_at DATETIME NOT NULL
 );
 
-ALTER TABLE event_stage_performances ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
-ALTER TABLE event_stage_performances ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);
-ALTER TABLE event_stage_performances ADD FOREIGN KEY (performance_id) REFERENCES `performances` (id);
+ALTER TABLE event_stage_performance ADD FOREIGN KEY (event_id) REFERENCES `events` (id);
+ALTER TABLE event_stage_performance ADD FOREIGN KEY (stage_id) REFERENCES `stages` (id);
+ALTER TABLE event_stage_performance ADD FOREIGN KEY (performance_id) REFERENCES `performances` (id);
 
 CREATE TABLE ticket_categories (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

@@ -27,11 +27,9 @@ public class TicketForm extends javax.swing.JFrame {
     /**
      * Creates new form TicketForm
      */
-    public TicketForm() {
-        initComponents();
-    }
-    
     public TicketForm(int eventId, int stageId) {
+        initComponents();
+        
         event = eventController.get(eventId);
         stage = stageController.get(stageId);
     }

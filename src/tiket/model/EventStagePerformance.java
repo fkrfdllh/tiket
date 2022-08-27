@@ -18,6 +18,16 @@ public class EventStagePerformance {
     private Stage stage;
     
     private Performance performance;
+    
+    private String startedAt;
+
+    public String getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(String startedAt) {
+        this.startedAt = startedAt;
+    }
 
     public int getId() {
         return id;

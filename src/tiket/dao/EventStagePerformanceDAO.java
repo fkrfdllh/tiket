@@ -14,11 +14,11 @@ import tiket.model.EventStagePerformance;
  */
 public interface EventStagePerformanceDAO {
 
-    public List<EventStagePerformance> getEventStagePerformances();
+    public List<EventStagePerformance> getEventStagePerformances(int eventId, int stageId);
 
     public EventStagePerformance getEventStagePerformance(int id);
 
-    public boolean insertEventStagePerformance(int eventId, int stageId, int performanceId);
+    public boolean insertEventStagePerformance(int eventId, int stageId, int performanceId, String startedAt);
 
     public boolean updateEventStagePerformance(EventStagePerformance eventStagePerformance);
 

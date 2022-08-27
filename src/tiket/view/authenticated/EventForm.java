@@ -5,9 +5,11 @@
  */
 package tiket.view.authenticated;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
