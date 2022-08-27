@@ -5,8 +5,6 @@
  */
 package tiket.view.authenticated;
 
-import java.awt.event.KeyEvent;
-
 /**
  *
  * @author fkrfd
@@ -18,10 +16,6 @@ public class DashboardForm extends javax.swing.JFrame {
      */
     public DashboardForm() {
         initComponents();
-    }
-    
-    public void eventReset() {
-        
     }
 
     /**
@@ -49,10 +43,20 @@ public class DashboardForm extends javax.swing.JFrame {
         });
 
         btnPerformance.setText("Manajemen Performance");
+        btnPerformance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerformanceActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Dashboard");
 
         btnAdmin.setText("Manajemen Admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +92,16 @@ public class DashboardForm extends javax.swing.JFrame {
         EventForm event = new EventForm();
         event.setVisible(true);
     }//GEN-LAST:event_btnEventActionPerformed
+
+    private void btnPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceActionPerformed
+        PerformanceForm performanceForm = new PerformanceForm();
+        performanceForm.setVisible(true);
+    }//GEN-LAST:event_btnPerformanceActionPerformed
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        AdminForm adminForm = new AdminForm();
+        adminForm.setVisible(true);
+    }//GEN-LAST:event_btnAdminActionPerformed
 
     /**
      * @param args the command line arguments

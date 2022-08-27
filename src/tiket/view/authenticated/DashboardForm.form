@@ -67,6 +67,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Manajemen Performance"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPerformanceActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -77,6 +80,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Manajemen Admin"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -14,7 +14,7 @@ import tiket.model.Stage;
  */
 public interface StageDAO {
 
-    public List<Stage> getStages();
+    public List<Stage> getStages(int eventId);
 
     public Stage getStage(int id);
 

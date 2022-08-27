@@ -29,13 +29,14 @@ public class StageQuery implements StageDAO {
     private final EventDAO eventDAO = new EventQuery();
 
     @Override
-    public List<Stage> getStages() {
+    public List<Stage> getStages(int eventId) {
         List<Stage> stages = new ArrayList<>();
 
-        query = "SELECT * FROM stages";
+        query = "SELECT * FROM stages WHERE event_id = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, eventId);
 
             ResultSet rs = stmt.executeQuery();
 
