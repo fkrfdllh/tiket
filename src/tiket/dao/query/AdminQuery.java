@@ -133,4 +133,47 @@ public class AdminQuery implements AdminDAO {
         return admin;
     }
 
+    @Override
+    public boolean update(Admin admin) {
+        String query = "UPDATE admins SET name = ?, email = ?, password = PASSWORD(?) WHERE id = ?";
+
+        try {
+            PreparedStatement statement = Database.getConnection().prepareStatement(query);
+            statement.setString(1, admin.getName());
+            statement.setString(2, admin.getEmail());
+            statement.setString(3, admin.getPassword());
+            statement.setInt(4, admin.getId());
+
+            int row = statement.executeUpdate();
+
+            if (row > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        String query = "DELETE FROM admins id = ?";
+
+        try {
+            PreparedStatement statement = Database.getConnection().prepareStatement(query);
+            statement.setInt(1, id);
+
+            int row = statement.executeUpdate();
+
+            if (row > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return false;
+    }
+
 }

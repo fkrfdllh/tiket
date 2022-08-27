@@ -17,6 +17,10 @@ public interface AdminDAO {
     public int login(String email, String password);
 
     public boolean register(String name, String email, String password);
+    
+    public boolean update(Admin admin);
+    
+    public boolean delete(int id);
 
     public List<Admin> getAdmins();
     
