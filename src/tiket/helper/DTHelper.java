@@ -7,13 +7,14 @@ package tiket.helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
  *
  * @author fkrfd
  */
-public class DateTimeFormatter {
+public class DTHelper {
 
     public String formatToSQL(String data, String format) {
         SimpleDateFormat formatter = new SimpleDateFormat(format);
@@ -30,5 +31,16 @@ public class DateTimeFormatter {
         }
 
         return SQLFormat;
+    }
+    
+    public String formatMysqlDate(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
+
+    public String setTimeFromDB(String time) {
+        String[] tempTime = time.split(":");
+        String[] copyTempTime = Arrays.copyOf(tempTime, tempTime.length - 1);
+
+        return String.join(":", copyTempTime);
     }
 }

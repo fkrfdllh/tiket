@@ -5,9 +5,11 @@
  */
 package tiket.controller;
 
+import java.util.Date;
 import tiket.dao.EventDAO;
 import tiket.dao.query.EventQuery;
 import java.util.List;
+import tiket.helper.DTHelper;
 import tiket.model.Event;
 
 /**
@@ -17,6 +19,8 @@ import tiket.model.Event;
 public class EventController {
 
     private final EventDAO eventDao = new EventQuery();
+    
+    private final DTHelper dTHelper = new DTHelper();
 
     public List<Event> getAll() {
         List<Event> events = eventDao.getEvents();
@@ -30,7 +34,13 @@ public class EventController {
         return event;
     }
 
-    public boolean insert(String name, String location, String startedAt, String finishedAt) {
+    public boolean insert(String name, String location, Date startedDate, String startedTime, Date finishedDate, String finishedTime) {
+        String sDate = dTHelper.formatMysqlDate(startedDate);
+        String fDate = dTHelper.formatMysqlDate(finishedDate);
+
+        String startedAt = sDate + " " + startedTime;
+        String finishedAt = fDate + " " + finishedTime;
+        
         boolean isEventCreated = eventDao.insertEvent(name, location, startedAt, finishedAt);
 
         return isEventCreated;

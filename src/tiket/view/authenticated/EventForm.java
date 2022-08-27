@@ -8,18 +8,13 @@ package tiket.view.authenticated;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tiket.controller.EventController;
-import tiket.helper.DateTimeFormatter;
+import tiket.helper.DTHelper;
 import tiket.model.Event;
 import tiket.view.authenticated.event.StageForm;
 
@@ -31,7 +26,7 @@ public class EventForm extends javax.swing.JFrame {
 
     private final EventController controller = new EventController();
 
-    private final DateTimeFormatter dateTimeFormatter = new DateTimeFormatter();
+    private final DTHelper dtHelper = new DTHelper();
 
     private DefaultTableModel tableModel;
 
@@ -79,17 +74,6 @@ public class EventForm extends javax.swing.JFrame {
 
             tableModel.addRow(data);
         });
-    }
-
-    private String formatMysqlDate(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(date);
-    }
-
-    private String setTimeFromDB(String time) {
-        String[] tempTime = time.split(":");
-        String[] copyTempTime = Arrays.copyOf(tempTime, tempTime.length - 1);
-
-        return String.join(":", copyTempTime);
     }
 
     private void resetInput() {
@@ -355,13 +339,8 @@ public class EventForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFinishedTimeKeyTyped
 
     private void eventBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventBtnAddActionPerformed
-        String startedDate = formatMysqlDate(txtStartedDate.getDate());
-        String finishedDate = formatMysqlDate(txtFinishedDate.getDate());
 
-        String startedAt = startedDate + " " + txtStartedTime.getText();
-        String finishedAt = finishedDate + " " + txtFinishedTime.getText();
-
-        boolean response = controller.insert(txtName.getText(), txtLocation.getText(), startedAt, finishedAt);
+        boolean response = controller.insert(txtName.getText(), txtLocation.getText(), txtStartedDate.getDate(), txtStartedTime.getText(), txtFinishedDate.getDate(), txtFinishedTime.getText());
 
         if (!response) {
             showMessage("Terjadi kesalahan saat menyimpan data, silahkan coba lagi");
@@ -374,8 +353,6 @@ public class EventForm extends javax.swing.JFrame {
     }//GEN-LAST:event_eventBtnAddActionPerformed
 
     private void tblEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventMouseClicked
-        int clickCount = evt.getClickCount();
-
         int row = tblEvent.getSelectedRow();
 
         String id = tableModel.getValueAt(row, 0).toString();
@@ -397,8 +374,8 @@ public class EventForm extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        String startedTime = setTimeFromDB(tempStartedAt[1]);
-        String finishedTime = setTimeFromDB(tempFinishedAt[1]);
+        String startedTime = dtHelper.setTimeFromDB(tempStartedAt[1]);
+        String finishedTime = dtHelper.setTimeFromDB(tempFinishedAt[1]);
 
         txtId.setText(id);
         txtName.setText(name);
@@ -417,8 +394,8 @@ public class EventForm extends javax.swing.JFrame {
             return;
         }
 
-        String startedDate = formatMysqlDate(txtStartedDate.getDate());
-        String finishedDate = formatMysqlDate(txtFinishedDate.getDate());
+        String startedDate = dtHelper.formatMysqlDate(txtStartedDate.getDate());
+        String finishedDate = dtHelper.formatMysqlDate(txtFinishedDate.getDate());
 
         String startedAt = startedDate + " " + txtStartedTime.getText();
         String finishedAt = finishedDate + " " + txtFinishedTime.getText();
