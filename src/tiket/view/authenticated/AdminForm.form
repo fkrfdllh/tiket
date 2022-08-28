@@ -9,7 +9,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1366, 768]"/>
     </Property>
@@ -51,15 +51,13 @@
                           <Component id="txtName" pref="250" max="32767" attributes="0"/>
                           <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtPassword" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnDelete" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnAdd" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnEdit" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="btnReset" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnDelete" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnAdd" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnEdit" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="btnReset" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

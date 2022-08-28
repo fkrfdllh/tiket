@@ -136,7 +136,7 @@ public class EventForm extends javax.swing.JFrame {
         txtId.setFocusable(false);
         txtId.setOpaque(false);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Manajemen Event");
@@ -471,6 +471,7 @@ public class EventForm extends javax.swing.JFrame {
 
     private void btnToStageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToStageActionPerformed
         StageForm stageForm = new StageForm(new Integer(txtId.getText()));
+        stageForm.setLocationRelativeTo(null);
         stageForm.setVisible(true);
     }//GEN-LAST:event_btnToStageActionPerformed
 
@@ -480,6 +481,7 @@ public class EventForm extends javax.swing.JFrame {
 
     private void btnToSponsorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToSponsorActionPerformed
         SponsorForm sponsorForm = new SponsorForm(new Integer(txtId.getText()));
+        sponsorForm.setLocationRelativeTo(null);
         sponsorForm.setVisible(true);
     }//GEN-LAST:event_btnToSponsorActionPerformed
 

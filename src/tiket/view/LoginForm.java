@@ -123,6 +123,7 @@ public class LoginForm extends javax.swing.JFrame {
         switch (response) {
             case 1:
                 DashboardForm dashboard = new DashboardForm();
+                dashboard.setLocationRelativeTo(null);
                 dashboard.setVisible(true);
                 this.dispose();
                 break;

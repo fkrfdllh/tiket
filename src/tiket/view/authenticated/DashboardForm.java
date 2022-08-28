@@ -112,26 +112,31 @@ public class DashboardForm extends javax.swing.JFrame {
 
     private void btnEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventActionPerformed
         EventForm event = new EventForm();
+        event.setLocationRelativeTo(null);
         event.setVisible(true);
     }//GEN-LAST:event_btnEventActionPerformed
 
     private void btnPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceActionPerformed
         PerformanceForm performanceForm = new PerformanceForm();
+        performanceForm.setLocationRelativeTo(null);
         performanceForm.setVisible(true);
     }//GEN-LAST:event_btnPerformanceActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         AdminForm adminForm = new AdminForm();
+        adminForm.setLocationRelativeTo(null);
         adminForm.setVisible(true);
     }//GEN-LAST:event_btnAdminActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
         RegistrationForm form = new RegistrationForm();
+        form.setLocationRelativeTo(null);
         form.setVisible(true);
     }//GEN-LAST:event_btnRegistrationActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ReportForm form = new ReportForm();
+        form.setLocationRelativeTo(null);
         form.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

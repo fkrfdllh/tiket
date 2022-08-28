@@ -210,7 +210,7 @@ public class RegistrationForm extends javax.swing.JFrame {
 
         txtId.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(1366, 768));
 
         tblRegistration.setModel(new javax.swing.table.DefaultTableModel(

@@ -51,6 +51,10 @@ public class TicketForm extends javax.swing.JFrame {
         resetInput();
     }
 
+    private TicketForm() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
@@ -130,7 +134,7 @@ public class TicketForm extends javax.swing.JFrame {
 
         txtId.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(1366, 768));
 
         jLabel10.setText("Dashboard >");

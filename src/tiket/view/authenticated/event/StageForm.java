@@ -49,6 +49,10 @@ public class StageForm extends javax.swing.JFrame {
         setStageTable();
         resetInput();
     }
+
+    private StageForm() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private void timeOnly(KeyEvent event) {
         char c = event.getKeyChar();
@@ -155,7 +159,7 @@ public class StageForm extends javax.swing.JFrame {
 
         txtId.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(1366, 768));
 
         jLabel10.setText("Dashboard >");
@@ -493,11 +497,13 @@ public class StageForm extends javax.swing.JFrame {
 
     private void btnToTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToTicketActionPerformed
         TicketForm ticketForm = new TicketForm(event.getId(), new Integer(txtId.getText()));
+        ticketForm.setLocationRelativeTo(null);
         ticketForm.setVisible(true);
     }//GEN-LAST:event_btnToTicketActionPerformed
 
     private void btnToPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToPerformanceActionPerformed
         PerformanceForm performanceForm = new PerformanceForm(event.getId(), new Integer(txtId.getText()));
+        performanceForm.setLocationRelativeTo(null);
         performanceForm.setVisible(true);
     }//GEN-LAST:event_btnToPerformanceActionPerformed
 

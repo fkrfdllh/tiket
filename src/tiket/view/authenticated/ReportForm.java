@@ -5,6 +5,7 @@
  */
 package tiket.view.authenticated;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -33,12 +34,14 @@ public class ReportForm extends javax.swing.JFrame {
 
     private void openReport(String fileName) {
         String reportPath = currentDirectory + "\\src\\tiket\\report\\" + fileName + ".jrxml";
+        
+        InputStream st = getClass().getResourceAsStream(reportPath);
 
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(reportPath);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp, false);
         } catch (JRException ex) {
             System.err.println(ex.getMessage());
         }
@@ -60,7 +63,7 @@ public class ReportForm extends javax.swing.JFrame {
         btnSponsor = new javax.swing.JButton();
         btnBestSeller = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Laporan");
 
