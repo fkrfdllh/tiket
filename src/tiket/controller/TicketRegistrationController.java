@@ -27,7 +27,7 @@ public class TicketRegistrationController {
         return registrationDAO.getTicketRegistration(id);
     }
     
-    public boolean register(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal, String orderedAt) {
-        return registrationDAO.insertTicketRegistration(eventId, stageId, ticketCategoryId, name, address, email, ticketTotal, priceTotal, orderedAt);
+    public boolean register(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal) {
+        return registrationDAO.insertTicketRegistration(eventId, stageId, ticketCategoryId, name, address, email, ticketTotal, priceTotal);
     }
 }

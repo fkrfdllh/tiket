@@ -18,5 +18,5 @@ public interface TicketRegistrationDAO {
 
     public TicketRegistration getTicketRegistration(int id);
 
-    public boolean insertTicketRegistration(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal, String orderedAt);
+    public boolean insertTicketRegistration(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal);
 }

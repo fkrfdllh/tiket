@@ -62,7 +62,7 @@ public class AdminQuery implements AdminDAO {
 
     @Override
     public boolean register(String name, String email, String password) {
-        String query = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?, PASSWORD(?))";
+        String query = "INSERT INTO admins (name, email, password) VALUES (?, ?, PASSWORD(?))";
 
         try {
             PreparedStatement statement = Database.getConnection().prepareStatement(query);

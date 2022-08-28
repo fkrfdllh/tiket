@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ce2bf66-6e36-48ef-9a83-3636e7bc741a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     events.`id` AS events_id,
+     events.`name` AS events_name,
+     events.`location` AS events_location,
+     events.`started_at` AS events_started_at,
+     events.`finished_at` AS events_finished_at
+FROM
+     `events` events]]>
+	</queryString>
+	<field name="events_id" class="java.lang.Long"/>
+	<field name="events_name" class="java.lang.String"/>
+	<field name="events_location" class="java.lang.String"/>
+	<field name="events_started_at" class="java.sql.Timestamp"/>
+	<field name="events_finished_at" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="145" y="28" width="299" height="36" uuid="d0606a7f-92fc-4eea-b036-cb431fac3070"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Event]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="c95ddcff-673c-4d8f-8ae7-a3cee3bf408d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="115f96c6-c485-4ce1-aa7b-8998173625c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="99c577a2-709b-4b0c-a000-4d17191a5785"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Lokasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="8780fea2-a60e-4b76-b44c-22fa6e727da7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Waktu Mulai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="ebcbcb42-4b0e-4192-92f6-d63b18c46e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Waktu Selesai]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="1bbc4636-7f70-4254-bb85-a79154f06640"/>
+				<textFieldExpression><![CDATA[$F{events_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="46ca2a0f-a08b-45b3-b3c1-ed036e54f1c0"/>
+				<textFieldExpression><![CDATA[$F{events_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="0eb9831f-fcdb-44d1-9f1a-6674b8b18651"/>
+				<textFieldExpression><![CDATA[$F{events_location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="e5af31d3-5c24-4e40-93ed-09656284bad1"/>
+				<textFieldExpression><![CDATA[$F{events_started_at}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="b4ba4863-c3fe-4385-887d-5e0b9ff79d08"/>
+				<textFieldExpression><![CDATA[$F{events_finished_at}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

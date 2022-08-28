@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31e6006f-939e-4e22-a3b6-76b352092b21">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT e.name AS event_name, s.name AS stage_name, t.id AS ticket_id, t.name AS ticket_name, COUNT(*) AS total
+	FROM ticket_registrations r
+		LEFT JOIN `events` e ON r.event_id = e.id
+		LEFT JOIN stages s ON r.stage_id = s.id
+		LEFT JOIN ticket_categories t ON r.ticket_category_id = t.id
+	GROUP BY t.id
+	ORDER BY total DESC;]]>
+	</queryString>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="stage_name" class="java.lang.String"/>
+	<field name="ticket_id" class="java.lang.Long"/>
+	<field name="ticket_name" class="java.lang.String"/>
+	<field name="total" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="0" width="299" height="36" uuid="862e8d8e-e35f-4f07-975d-53510a73e2b3"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Best Seller Tiket]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="41" width="100" height="20" uuid="ee345147-9ff9-4be8-b50b-477c8f648b47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Event]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="41" width="100" height="20" uuid="885a106c-ec36-4a4c-98f2-0a948ffed69e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="41" width="100" height="20" uuid="cda1e9ef-ebeb-48c8-9d3c-889c9d379f15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Tiket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="41" width="100" height="20" uuid="c4d58f50-50c7-43b9-880d-be5fa380b661"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Tiket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="41" width="100" height="20" uuid="624dd547-8516-47f3-a1a4-0c2217a1aee9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Penjualan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="39" y="0" width="100" height="20" uuid="f0733179-6d78-4bdb-9064-57cad35df151"/>
+				<textFieldExpression><![CDATA[$F{event_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="0" width="100" height="20" uuid="265da230-bf70-4413-a935-7b688bbf0449"/>
+				<textFieldExpression><![CDATA[$F{stage_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="0" width="100" height="20" uuid="279b75d8-39cb-4618-b564-b341df043b51"/>
+				<textFieldExpression><![CDATA[$F{ticket_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="0" width="100" height="20" uuid="ee981eb9-da48-42c0-8c0a-20e35f3b9337"/>
+				<textFieldExpression><![CDATA[$F{ticket_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="0" width="100" height="20" uuid="ec5d223d-bd22-4413-a3a6-12cbbdab128c"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

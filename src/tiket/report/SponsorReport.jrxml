@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eea5d208-e23d-4b11-bbcb-f3a5d215f2f9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="New Dataset 1" uuid="1521dd47-0bb6-4a99-abbb-122deaeeee8d">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     events.`id` AS events_id,
+     events.`name` AS events_name,
+     events.`location` AS events_location,
+     events.`started_at` AS events_started_at,
+     events.`finished_at` AS events_finished_at
+FROM
+     `events` events]]>
+		</queryString>
+		<field name="events_id" class="java.lang.Long"/>
+		<field name="events_name" class="java.lang.String"/>
+		<field name="events_location" class="java.lang.String"/>
+		<field name="events_started_at" class="java.sql.Timestamp"/>
+		<field name="events_finished_at" class="java.sql.Timestamp"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[select e.name as event_name, s.id as sponsor_id, s.name as sponsor_name, s.tier as sponsor_tier from event_sponsors s left join `events` e on s.event_id = e.id;]]>
+	</queryString>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="sponsor_id" class="java.lang.Long"/>
+	<field name="sponsor_name" class="java.lang.String"/>
+	<field name="sponsor_tier" class="java.lang.Boolean"/>
+	<group name="event_name">
+		<groupExpression><![CDATA[$F{event_name}]]></groupExpression>
+	</group>
+	<group name="sponsor_id">
+		<groupExpression><![CDATA[$F{sponsor_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="172" y="22" width="229" height="36" uuid="e151914c-b114-4532-a87a-1a64181abefb"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Sponsor]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="101" y="41" width="100" height="20" uuid="48f97ba4-eb44-4e84-931d-059d104ca27a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Event]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="41" width="100" height="20" uuid="aa3b1442-03ae-48f9-9393-0cb9e74d25f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Sponsor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="41" width="100" height="20" uuid="24db9841-583d-414f-a84d-b3aabf33fd64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Sponsor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="41" width="100" height="20" uuid="47bf362f-9fc2-4d91-8077-c3ae741827fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tier Sponsor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="101" y="0" width="100" height="20" uuid="92672020-1b1f-4808-ab7a-420503bea30a"/>
+				<textFieldExpression><![CDATA[$F{event_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="100" height="20" uuid="25a886d0-5036-454f-9c30-cf316eae0354"/>
+				<textFieldExpression><![CDATA[$F{sponsor_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="100" height="20" uuid="392a80e1-8b0f-4264-9cce-90911ffd885b"/>
+				<textFieldExpression><![CDATA[$F{sponsor_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="100" height="20" uuid="64f0d24e-e930-4f4c-a13b-f8e65a69ec5a"/>
+				<textFieldExpression><![CDATA[$F{sponsor_tier}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

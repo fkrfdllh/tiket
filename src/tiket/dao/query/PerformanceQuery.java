@@ -66,6 +66,8 @@ public class PerformanceQuery implements PerformanceDAO {
             if (rs.next()) {
                 performance.setId(rs.getInt(1));
                 performance.setName(rs.getString(2));
+                
+                System.out.println(rs.getString(2));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

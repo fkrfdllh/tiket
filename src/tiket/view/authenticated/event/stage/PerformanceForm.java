@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tiket.controller.EventController;
@@ -19,6 +18,7 @@ import tiket.controller.StageController;
 import tiket.helper.DTHelper;
 import tiket.model.Event;
 import tiket.model.EventStagePerformance;
+import tiket.model.Performance;
 import tiket.model.Stage;
 
 /**
@@ -83,7 +83,7 @@ public class PerformanceForm extends javax.swing.JFrame {
         List<EventStagePerformance> performances = performanceController.getAll(event.getId(), stage.getId());
 
         performances.forEach((performance) -> {
-            Object[] data = {
+           Object[] data = {
                 performance.getId(),
                 performance.getPerformance().getName(),
                 performance.getStartedAt(),
@@ -113,10 +113,10 @@ public class PerformanceForm extends javax.swing.JFrame {
     }
 
     private void populatePerformanceList() {
-        List<EventStagePerformance> performances = performanceController.getAll(event.getId(), stage.getId());
+        List<Performance> performances = pController.getAll();
 
         performances.forEach((performance) -> {
-            comboBoxModel.addElement(performance.getPerformance().getId() + " " + performance.getPerformance().getName());
+            cbId.addItem(performance.getId() + " " + performance.getName());
         });
     }
 

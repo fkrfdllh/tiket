@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d17ee76a-43c0-4536-a1f3-55e585fd6b52">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select e.name as event_name, s.name as stage_name, t.id as ticket_id, r.id as id, r.name as `name`, r.address as address, r.email as email,
+	r.ticket_total as ticket_total, r.price_total as price_total, r.ordered_at as ordered_at
+	from ticket_registrations r
+		left join `events` e on r.event_id = e.id
+		left join stages s on r.stage_id = s.id
+		left join ticket_categories t on r.ticket_category_id = t.id;]]>
+	</queryString>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="stage_name" class="java.lang.String"/>
+	<field name="ticket_id" class="java.lang.Long"/>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ticket_total" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price_total" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ordered_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="event_name">
+		<groupExpression><![CDATA[$F{event_name}]]></groupExpression>
+	</group>
+	<group name="stage_name">
+		<groupExpression><![CDATA[$F{stage_name}]]></groupExpression>
+	</group>
+	<group name="ticket_id">
+		<groupExpression><![CDATA[$F{ticket_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="135" y="18" width="299" height="36" uuid="0ea0d578-16f1-4f77-8043-c77c18f32dd0"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Penjualan Tiket]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20" uuid="e61e7e0e-0bf6-4632-beb6-0c5d140d9c5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Event]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="41" width="100" height="20" uuid="28040e1c-2ecf-4ff3-8537-5c9d51d45e9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Tiket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="41" width="100" height="20" uuid="cfa39382-69fd-40b8-89a2-b2add2b418ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Pembeli]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="41" width="100" height="20" uuid="325c7649-cf94-413d-9daa-a59f34f5e280"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Email Pembeli]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="41" width="55" height="20" uuid="44ee2ae9-1ee2-443e-8d5b-b9cc45f229a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="41" width="100" height="20" uuid="a358d3ec-d759-4bec-adac-9d2c6a48b8e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Waktu Pembelian]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="3d8c7411-0183-48f3-b0bf-79958165959b"/>
+				<textFieldExpression><![CDATA[$F{event_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="b4ab5b7d-3665-404a-a2b6-738628f24322"/>
+				<textFieldExpression><![CDATA[$F{ticket_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="9b860e0c-71cd-4a05-846b-bbce3c5074b5"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="093a1811-27c0-4029-a4d3-03e20bba1979"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="55" height="20" uuid="ba5717ec-c25e-4b38-9aba-422d767304e5"/>
+				<textFieldExpression><![CDATA[$F{ticket_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="8a0c8aaa-d5bb-4257-9e77-9b5d3137ae33"/>
+				<textFieldExpression><![CDATA[$F{ordered_at}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

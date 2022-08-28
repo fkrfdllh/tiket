@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6edca91-c177-43e3-8c50-33bf0876df08">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select e.name event_name, s.id as stage_id, s.name as stage_name, p.name as performance_name, t.id as ticket_id, t.quota as ticket_quota
+	from stages s
+		left join `events` e on s.event_id = e.id
+		left join event_stage_performance esp on s.id = esp.stage_id
+			left join performances p on esp.performance_id = p.id
+		left join ticket_categories t on s.id = t.stage_id;]]>
+	</queryString>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="stage_id" class="java.lang.Long"/>
+	<field name="stage_name" class="java.lang.String"/>
+	<field name="performance_name" class="java.lang.String"/>
+	<field name="ticket_id" class="java.lang.Long"/>
+	<field name="ticket_quota" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="255" y="18" width="299" height="36" uuid="429525be-1b91-477e-bfec-d0fdf4bb0af7"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Stage]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="133" height="20" uuid="b448d8ce-5ab3-4a18-ba9a-082577510a2c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Event]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="41" width="133" height="20" uuid="8e998c36-db51-44a9-9f31-d956b1743206"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="41" width="133" height="20" uuid="679e72ee-7b1f-41f0-ade9-f4d7fd42fb5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Stage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="41" width="133" height="20" uuid="bfbad7b2-7ad1-4ed6-b48e-78aeaa2b4d74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Performance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="41" width="133" height="20" uuid="2b7e5c70-c20b-4543-be06-f5ce415e90f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID TIket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="665" y="41" width="133" height="20" uuid="c111dd83-8e23-401a-833d-874bd5e7f6f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kuota Tiket]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="133" height="20" uuid="159f399a-cf40-4cee-9495-12cab7787a35"/>
+				<textFieldExpression><![CDATA[$F{event_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="133" height="20" uuid="c1792639-4c58-499e-a939-36925e877d72"/>
+				<textFieldExpression><![CDATA[$F{stage_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="0" width="133" height="20" uuid="58bfa5bc-ebad-4806-a4a9-ae5736c4ec6b"/>
+				<textFieldExpression><![CDATA[$F{stage_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="0" width="133" height="20" uuid="b1d6f66b-8881-4fd2-89dc-a05593e39c46"/>
+				<textFieldExpression><![CDATA[$F{performance_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="133" height="20" uuid="39b612e4-4bd3-4fc0-bd65-0c615968a986"/>
+				<textFieldExpression><![CDATA[$F{ticket_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="665" y="0" width="133" height="20" uuid="52674cba-492b-4962-a7fe-fb4dd3eaaf60"/>
+				<textFieldExpression><![CDATA[$F{ticket_quota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

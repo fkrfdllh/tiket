@@ -88,6 +88,7 @@ public class EventForm extends javax.swing.JFrame {
         txtFinishedTime.setText("");
 
         btnToStage.setEnabled(false);
+        btnToSponsor.setEnabled(false);
     }
 
     /**
@@ -416,6 +417,7 @@ public class EventForm extends javax.swing.JFrame {
         txtFinishedTime.setText(finishedTime);
 
         btnToStage.setEnabled(true);
+        btnToSponsor.setEnabled(true);
     }//GEN-LAST:event_tblEventMouseClicked
 
     private void eventBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventBtnEditActionPerformed

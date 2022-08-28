@@ -5,21 +5,17 @@
  */
 package tiket;
 
-import java.util.Date;
 import tiket.view.LoginForm;
-import tiket.view.authenticated.DashboardForm;
 
 /**
  *
  * @author fkrfd
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-        
-//        LoginForm form  = new LoginForm();
-        DashboardForm form = new DashboardForm();
+
+        LoginForm form = new LoginForm();
         form.setVisible(true);
-        
     }
 }

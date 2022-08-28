@@ -5,17 +5,43 @@
  */
 package tiket.view.authenticated;
 
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import tiket.config.Database;
+
 /**
  *
  * @author fkrfd
  */
-public class DashboardForm extends javax.swing.JFrame {
+public class ReportForm extends javax.swing.JFrame {
+
+    private String currentDirectory = System.getProperty("user.dir");
+
+    private final Connection conn = Database.getConnection();
 
     /**
-     * Creates new form Dashboard
+     * Creates new form ReportForm
      */
-    public DashboardForm() {
+    public ReportForm() {
         initComponents();
+    }
+
+    private void openReport(String fileName) {
+        String reportPath = currentDirectory + "\\src\\tiket\\report\\" + fileName + ".jrxml";
+
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(reportPath);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
+            JasperViewer.viewReport(jp);
+        } catch (JRException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
     /**
@@ -27,50 +53,49 @@ public class DashboardForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEvent = new javax.swing.JButton();
-        btnPerformance = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnAdmin = new javax.swing.JButton();
         btnRegistration = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnEvent = new javax.swing.JButton();
+        btnStage = new javax.swing.JButton();
+        btnSponsor = new javax.swing.JButton();
+        btnBestSeller = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(1366, 768));
 
-        btnEvent.setText("Manajemen Event");
-        btnEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEventActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Laporan");
 
-        btnPerformance.setText("Manajemen Performance");
-        btnPerformance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPerformanceActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Dashboard");
-
-        btnAdmin.setText("Manajemen Admin");
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminActionPerformed(evt);
-            }
-        });
-
-        btnRegistration.setText("Registrasi Tiket");
+        btnRegistration.setText("Laporan Pemesanan Tiket");
         btnRegistration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrationActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Laporan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEvent.setText("Laporan Event");
+        btnEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEventActionPerformed(evt);
+            }
+        });
+
+        btnStage.setText("Laporan Stage");
+        btnStage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStageActionPerformed(evt);
+            }
+        });
+
+        btnSponsor.setText("Laporan Sponsor");
+        btnSponsor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSponsorActionPerformed(evt);
+            }
+        });
+
+        btnBestSeller.setText("Laporan Best Seller Tiket");
+        btnBestSeller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBestSellerActionPerformed(evt);
             }
         });
 
@@ -83,10 +108,10 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(btnEvent)
-                    .addComponent(btnPerformance)
-                    .addComponent(btnAdmin)
+                    .addComponent(btnStage)
+                    .addComponent(btnSponsor)
                     .addComponent(btnRegistration)
-                    .addComponent(jButton1))
+                    .addComponent(btnBestSeller))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,46 +119,41 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(btnEvent)
+                .addGap(10, 10, 10)
+                .addComponent(btnSponsor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPerformance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAdmin)
+                .addComponent(btnStage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistration)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(btnBestSeller)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventActionPerformed
-        EventForm event = new EventForm();
-        event.setVisible(true);
-    }//GEN-LAST:event_btnEventActionPerformed
-
-    private void btnPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceActionPerformed
-        PerformanceForm performanceForm = new PerformanceForm();
-        performanceForm.setVisible(true);
-    }//GEN-LAST:event_btnPerformanceActionPerformed
-
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        AdminForm adminForm = new AdminForm();
-        adminForm.setVisible(true);
-    }//GEN-LAST:event_btnAdminActionPerformed
-
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        RegistrationForm form = new RegistrationForm();
-        form.setVisible(true);
+        openReport("TicketRegistrationReport");
     }//GEN-LAST:event_btnRegistrationActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ReportForm form = new ReportForm();
-        form.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventActionPerformed
+        openReport("EventReport");
+    }//GEN-LAST:event_btnEventActionPerformed
+
+    private void btnStageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStageActionPerformed
+        openReport("StageReport");
+    }//GEN-LAST:event_btnStageActionPerformed
+
+    private void btnSponsorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSponsorActionPerformed
+        openReport("SponsorReport");
+    }//GEN-LAST:event_btnSponsorActionPerformed
+
+    private void btnBestSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestSellerActionPerformed
+        openReport("BestSellerReport");
+    }//GEN-LAST:event_btnBestSellerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,31 +172,30 @@ public class DashboardForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardForm().setVisible(true);
+                new ReportForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnBestSeller;
     private javax.swing.JButton btnEvent;
-    private javax.swing.JButton btnPerformance;
     private javax.swing.JButton btnRegistration;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSponsor;
+    private javax.swing.JButton btnStage;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

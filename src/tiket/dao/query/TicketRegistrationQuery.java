@@ -103,8 +103,8 @@ public class TicketRegistrationQuery implements TicketRegistrationDAO {
     }
 
     @Override
-    public boolean insertTicketRegistration(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal, String orderedAt) {
-        query = "INSERT INTO ticket_registrations (event_id, stage_id, ticket_category_id, name, address, email, ticket_total, price_total, ordered_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean insertTicketRegistration(int eventId, int stageId, int ticketCategoryId, String name, String address, String email, int ticketTotal, int priceTotal) {
+        query = "INSERT INTO ticket_registrations (event_id, stage_id, ticket_category_id, name, address, email, ticket_total, price_total, ordered_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         
         try {
             conn.setAutoCommit(false);
@@ -118,7 +118,6 @@ public class TicketRegistrationQuery implements TicketRegistrationDAO {
             stmt.setString(6, email);
             stmt.setInt(7, ticketTotal);
             stmt.setInt(8, priceTotal);
-            stmt.setString(9, "NOW()");
             
             int row = stmt.executeUpdate();
             

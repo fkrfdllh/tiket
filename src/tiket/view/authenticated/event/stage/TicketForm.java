@@ -304,10 +304,10 @@ public class TicketForm extends javax.swing.JFrame {
 
         String id = tableModel.getValueAt(row, 0).toString();
         String name = tableModel.getValueAt(row, 1).toString();
-        String category = tableModel.getValueAt(row, 3).toString();
-        String type = tableModel.getValueAt(row, 4).toString();
-        String price = tableModel.getValueAt(row, 5).toString();
-        String quota = tableModel.getValueAt(row, 6).toString();
+        String category = tableModel.getValueAt(row, 2).toString();
+        String type = tableModel.getValueAt(row, 3).toString();
+        String price = tableModel.getValueAt(row, 4).toString();
+        String quota = tableModel.getValueAt(row, 5).toString();
 
         txtId.setText(id);
         txtName.setText(name);

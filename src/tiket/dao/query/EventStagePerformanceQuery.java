@@ -53,6 +53,7 @@ public class EventStagePerformanceQuery implements EventStagePerformanceDAO {
                 item.setEvent(eventDAO.getEvent(rs.getInt(2)));
                 item.setStage(stageDAO.getStage(rs.getInt(3)));
                 item.setPerformance(performanceDAO.getPerformance(4));
+                item.setStartedAt(rs.getString(5));
 
                 list.add(item);
             }
